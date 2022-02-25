@@ -1,0 +1,489 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "Ingress",
+            "metadata": {
+                "annotations": {
+                    "nginx.ingress.kubernetes.io/backend-protocol": "HTTPS"
+                },
+                "creationTimestamp": "2022-01-31T17:41:11Z",
+                "generation": 1,
+                "name": "kubernetes-ingress",
+                "namespace": "default",
+                "resourceVersion": "4039399",
+                "uid": "a2c71998-04d9-4fb0-8ee1-5952f1baba8c"
+            },
+            "spec": {
+                "rules": [
+                    {
+                        "host": "kubernetes.k8s-beta.sonicstorm.evoforge.org",
+                        "http": {
+                            "paths": [
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "kubernetes",
+                                            "port": {
+                                                "number": 443
+                                            }
+                                        }
+                                    },
+                                    "path": "/",
+                                    "pathType": "Prefix"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "tls": [
+                    {
+                        "hosts": [
+                            "kubernetes.k8s-beta.sonicstorm.evoforge.org"
+                        ],
+                        "secretName": "star-cert"
+                    }
+                ]
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "ip": "10.113.198.109"
+                        },
+                        {
+                            "ip": "10.113.198.144"
+                        },
+                        {
+                            "ip": "10.113.198.251"
+                        },
+                        {
+                            "ip": "10.113.199.76"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "Ingress",
+            "metadata": {
+                "annotations": {
+                    "ingress.kubernetes.io/proxy-body-size": "0",
+                    "ingress.kubernetes.io/ssl-redirect": "true",
+                    "meta.helm.sh/release-name": "harbor",
+                    "meta.helm.sh/release-namespace": "harbor",
+                    "nginx.ingress.kubernetes.io/proxy-body-size": "0",
+                    "nginx.ingress.kubernetes.io/ssl-redirect": "true"
+                },
+                "creationTimestamp": "2022-02-22T11:24:10Z",
+                "generation": 1,
+                "labels": {
+                    "app": "harbor",
+                    "app.kubernetes.io/managed-by": "Helm",
+                    "chart": "harbor",
+                    "heritage": "Helm",
+                    "release": "harbor"
+                },
+                "name": "harbor-ingress",
+                "namespace": "harbor",
+                "resourceVersion": "4039398",
+                "uid": "5bc68718-4ac2-483c-8d4e-e3243b47c39f"
+            },
+            "spec": {
+                "ingressClassName": "nginx",
+                "rules": [
+                    {
+                        "host": "harbor.k8s-beta.sonicstorm.evoforge.org",
+                        "http": {
+                            "paths": [
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-portal",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "path": "/",
+                                    "pathType": "Prefix"
+                                },
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-core",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "path": "/api/",
+                                    "pathType": "Prefix"
+                                },
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-core",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "path": "/service/",
+                                    "pathType": "Prefix"
+                                },
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-core",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "path": "/v2",
+                                    "pathType": "Prefix"
+                                },
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-core",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "path": "/chartrepo/",
+                                    "pathType": "Prefix"
+                                },
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-core",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "path": "/c/",
+                                    "pathType": "Prefix"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "tls": [
+                    {
+                        "hosts": [
+                            "harbor.k8s-beta.sonicstorm.evoforge.org"
+                        ]
+                    }
+                ]
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "ip": "10.113.198.109"
+                        },
+                        {
+                            "ip": "10.113.198.144"
+                        },
+                        {
+                            "ip": "10.113.198.251"
+                        },
+                        {
+                            "ip": "10.113.199.76"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "Ingress",
+            "metadata": {
+                "annotations": {
+                    "ingress.kubernetes.io/proxy-body-size": "0",
+                    "ingress.kubernetes.io/ssl-redirect": "true",
+                    "meta.helm.sh/release-name": "harbor",
+                    "meta.helm.sh/release-namespace": "harbor",
+                    "nginx.ingress.kubernetes.io/proxy-body-size": "0",
+                    "nginx.ingress.kubernetes.io/ssl-redirect": "true"
+                },
+                "creationTimestamp": "2022-02-22T11:24:10Z",
+                "generation": 1,
+                "labels": {
+                    "app": "harbor",
+                    "app.kubernetes.io/managed-by": "Helm",
+                    "chart": "harbor",
+                    "heritage": "Helm",
+                    "release": "harbor"
+                },
+                "name": "harbor-ingress-notary",
+                "namespace": "harbor",
+                "resourceVersion": "4039419",
+                "uid": "bce7babe-c92c-42b0-a954-8cbedc5285b1"
+            },
+            "spec": {
+                "ingressClassName": "nginx",
+                "rules": [
+                    {
+                        "host": "notary-harbor.k8s-beta.sonicstorm.evoforge.org",
+                        "http": {
+                            "paths": [
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "harbor-notary-server",
+                                            "port": {
+                                                "number": 4443
+                                            }
+                                        }
+                                    },
+                                    "path": "/",
+                                    "pathType": "Prefix"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "tls": [
+                    {
+                        "hosts": [
+                            "notary-harbor.k8s-beta.sonicstorm.evoforge.org"
+                        ]
+                    }
+                ]
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "ip": "10.113.198.109"
+                        },
+                        {
+                            "ip": "10.113.198.144"
+                        },
+                        {
+                            "ip": "10.113.198.251"
+                        },
+                        {
+                            "ip": "10.113.199.76"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "Ingress",
+            "metadata": {
+                "annotations": {
+                    "nginx.ingress.kubernetes.io/backend-protocol": "HTTPS"
+                },
+                "creationTimestamp": "2022-02-24T12:32:24Z",
+                "generation": 1,
+                "name": "jaeger-ingress",
+                "namespace": "linkerd",
+                "resourceVersion": "4039428",
+                "uid": "c7ee54a0-6edb-4991-b703-b10eae466905"
+            },
+            "spec": {
+                "ingressClassName": "nginx",
+                "rules": [
+                    {
+                        "host": "jaeger.k8s-beta.sonicstorm.evoforge.org",
+                        "http": {
+                            "paths": [
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "jaeger",
+                                            "port": {
+                                                "number": 16686
+                                            }
+                                        }
+                                    },
+                                    "path": "/",
+                                    "pathType": "Prefix"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "tls": [
+                    {
+                        "hosts": [
+                            "jaeger.k8s-beta.sonicstorm.evoforge.org"
+                        ],
+                        "secretName": "star-cert"
+                    }
+                ]
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "ip": "10.113.198.109"
+                        },
+                        {
+                            "ip": "10.113.198.144"
+                        },
+                        {
+                            "ip": "10.113.198.251"
+                        },
+                        {
+                            "ip": "10.113.199.76"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "Ingress",
+            "metadata": {
+                "annotations": {
+                    "nginx.ingress.kubernetes.io/backend-protocol": "HTTPS"
+                },
+                "creationTimestamp": "2022-02-24T12:32:21Z",
+                "generation": 1,
+                "name": "web-ingress",
+                "namespace": "linkerd",
+                "resourceVersion": "4039401",
+                "uid": "2dc7848a-a027-464a-b91e-004578028891"
+            },
+            "spec": {
+                "ingressClassName": "nginx",
+                "rules": [
+                    {
+                        "host": "linkerd.k8s-beta.sonicstorm.evoforge.org",
+                        "http": {
+                            "paths": [
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "web",
+                                            "port": {
+                                                "number": 8084
+                                            }
+                                        }
+                                    },
+                                    "path": "/",
+                                    "pathType": "Prefix"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "tls": [
+                    {
+                        "hosts": [
+                            "linkerd.k8s-beta.sonicstorm.evoforge.org"
+                        ],
+                        "secretName": "star-cert"
+                    }
+                ]
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "ip": "10.113.198.109"
+                        },
+                        {
+                            "ip": "10.113.198.144"
+                        },
+                        {
+                            "ip": "10.113.198.251"
+                        },
+                        {
+                            "ip": "10.113.199.76"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "networking.k8s.io/v1",
+            "kind": "Ingress",
+            "metadata": {
+                "annotations": {
+                    "ingress.kubernetes.io/secure-backends": "true",
+                    "meta.helm.sh/release-name": "longhorn",
+                    "meta.helm.sh/release-namespace": "longhorn-system"
+                },
+                "creationTimestamp": "2022-01-31T17:28:10Z",
+                "generation": 1,
+                "labels": {
+                    "app": "longhorn-ingress",
+                    "app.kubernetes.io/instance": "longhorn",
+                    "app.kubernetes.io/managed-by": "Helm",
+                    "app.kubernetes.io/name": "longhorn",
+                    "app.kubernetes.io/version": "v1.2.2",
+                    "helm.sh/chart": "longhorn-1.2.2"
+                },
+                "name": "longhorn-ingress",
+                "namespace": "longhorn-system",
+                "resourceVersion": "4039400",
+                "uid": "610d0ece-41c9-4472-8cb3-092a2dfb64a6"
+            },
+            "spec": {
+                "rules": [
+                    {
+                        "host": "longhorn.k8s-beta.sonicstorm.evoforge.org",
+                        "http": {
+                            "paths": [
+                                {
+                                    "backend": {
+                                        "service": {
+                                            "name": "longhorn-frontend",
+                                            "port": {
+                                                "number": 80
+                                            }
+                                        }
+                                    },
+                                    "pathType": "ImplementationSpecific"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "tls": [
+                    {
+                        "hosts": [
+                            "longhorn.k8s-beta.sonicstorm.evoforge.org"
+                        ],
+                        "secretName": "star-cert"
+                    }
+                ]
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "ip": "10.113.198.109"
+                        },
+                        {
+                            "ip": "10.113.198.144"
+                        },
+                        {
+                            "ip": "10.113.198.251"
+                        },
+                        {
+                            "ip": "10.113.199.76"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
