@@ -1,7 +1,13 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
-export const ingresses = writable([]);
+export const ingressData = writable([]);
 
-export const fetchIngress = async () => {
-  return fetch('/data.json');
-};
+export const hostNames = derived(ingressData, ($ingressData) => {
+  let hosts = {}
+  $ingressData.forEach((ingress) => {
+    ingress.spec.rules.forEach((rule) => {
+      hosts[rule.host] = 1
+    })
+  })
+  return Object.keys(hosts);
+});

@@ -1,17 +1,23 @@
 <script>
+  import { onMount } from "svelte";
+  import { ingressData } from '../stores/ingresses.js';
+
+  onMount(async () => {
+    fetch("/data.json")
+    .then(response => response.json())
+    .then(data => {
+      ingressData.set(data.items);
+    }).catch(error => {
+      console.log(error);
+      return [];
+    });
+  });
   import IngressCard from '../components/ingress-card.svelte';
-  import {fetchIngress} from '../stores/ingresses.js';
 </script>
-<div class="container mx-auto px-4">
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+<div class="md:container md:mx-auto">
+  <div class="grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-4">
+    {#each $ingressData as ingress }
+      <IngressCard ingress={ingress} />
+    {/each}
+  </div>
 </div>
-<IngressCard/>
-{#await fetchIngress}
-  <p>Loading...</p>
-{:then resp}
-  { resp }
-{:catch error}
-  <p style="color: red">{error}</p>
-{/await}
