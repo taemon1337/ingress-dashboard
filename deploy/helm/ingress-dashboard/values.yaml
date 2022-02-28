@@ -9,13 +9,15 @@ image:
     repository: taemon1337/image-api
     pullPolicy: IfNotPresent
     tag: "0.0.1"
-  curl:
-    repository: taemon1337/k8s-curl
+  kubectl:
+    repository: bitnami/kubectl
     pullPolicy: IfNotPresent
-    tag: "0.0.1"
+    tag: latest
 
 ingress:
   enabled: true
+  host: dashboard
+  tls: null
 
 resources:
   limits:

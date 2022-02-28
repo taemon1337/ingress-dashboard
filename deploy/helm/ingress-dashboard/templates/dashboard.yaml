@@ -18,16 +18,22 @@ spec:
       volumes:
       - name: data-volume
         emptyDir: {}
+      - name: dotenv
+        configMap:
+          name: {{ .Release.Name }}-dotenv
+          items:
+          - key: ".env"
+            path: ".env"
       containers:
-        - name: {{ .Release.Name }}
+        - name: dashboard
           image: {{ .Values.image.dashboard.repository }}:{{ .Values.image.dashboard.tag | default .Chart.AppVersion }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.image.dashboard.pullPolicy }}
           env:
             - name: VITE_IMAGE_API
-              value: http://127.0.0.1:8080
+              value: http://images.svc
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -40,36 +46,22 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: /app/static/data.json
+            - mountPath: /data
               name: data-volume
               readOnly: true
-        - name: images
-          image: {{ .Values.image.images.repository }}:{{ .Values.image.images.tag | default .Chart.AppVersion }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-        - name: curl
-          image: {{ .Values.image.curl.repository }}:{{ .Values.image.curl.tag | default .Chart.AppVersion }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-          - name: JSONFILE
-            value: /data.json
+            - mountPath: /usr/share/caddy/
+              name: dotenv
+              readOnly: true
+        - name: kubectl
+          image: {{ .Values.image.kubectl.repository }}:{{ .Values.image.kubectl.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.kubectl.pullPolicy }}
+          command:
+          - /bin/sh
+          - -c
+          - "while true; do kubectl get ingress -A -o json > /data/data.json && echo LOG-$(date) Downloaded /data/data.json ; sleep 3600; done"
           volumeMounts:
-            - mountPath: /data.json
+            - mountPath: /data
               name: data-volume
               readOnly: false
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-
