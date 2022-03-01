@@ -41,8 +41,8 @@
             <a href on:click|preventDefault={showhide} title="Show details" class="text-xs float-right text-right">
               <Icon size="32" src="{InformationCircle}" />
             </a>
-            <a target="_blank" href={href} class="btn btn-sm btn-success">
-              Open {name}
+            <a target="_blank" href={href} class="btn btn-sm btn-primary">
+              {name}
             </a>
           </div>
         </div>
