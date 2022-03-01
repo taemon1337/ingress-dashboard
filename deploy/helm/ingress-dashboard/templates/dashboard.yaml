@@ -37,11 +37,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /favicon.png
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /favicon.png
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

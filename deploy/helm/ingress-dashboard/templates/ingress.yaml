@@ -32,7 +32,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Release.Name }}-images
+            name: images
             port:
               number: 8080
   {{ if .Values.ingress.tls }}
