@@ -9,6 +9,7 @@ RUN npm run build
 FROM nginx:alpine
 
 COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=0 /app/etc/nginx /etc/nginx
 
 WORKDIR /usr/share/nginx/html
 
