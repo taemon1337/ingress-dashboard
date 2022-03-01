@@ -15,7 +15,7 @@
   import IngressCard from '../components/ingress-card.svelte';
 </script>
 <div class="md:container md:mx-auto">
-  <div class="grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-4">
+  <div class="grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-1 gap-4">
     {#each $ingressData as ingress }
       <IngressCard ingress={ingress} />
     {/each}

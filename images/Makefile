@@ -2,10 +2,10 @@ SHELL=/bin/bash
 PWD=`pwd`
 BASEIMAGE=`cat Dockerfile | head -n 1 | cut -d' ' -f2`
 CACHE=~/.cache/pip
-PORT=8080
-IMAGE=image-api
-VERSION=`cat VERSION | head -n 1`
 DOCKER_USER=`git config --get remote.origin.url | cut -d: -f2 | cut -d/ -f1`
+PORT=8080
+VERSION=`cat VERSION | head -n 1`
+IMAGE=${DOCKER_USER}/image-api
 
 shell:
 	docker run --rm  -it -v ${PWD}:/app -v ${CACHE}:/root/.cache -w /app ${BASEIMAGE} /bin/sh
@@ -19,8 +19,7 @@ build:
 serve:
 	docker run -it -e DEBUG=1 -p ${PORT}:${PORT} ${IMAGE}:${VERSION}
 
-release:
-	docker tag ${IMAGE}:${VERSION} ${DOCKER_USER}/${IMAGE}:${VERSION}
-	docker tag ${DOCKER_USER}/${IMAGE}:${VERSION} ${DOCKER_USER}/${IMAGE}:latest
-	docker push ${DOCKER_USER}/${IMAGE}:${VERSION}
-	docker push ${DOCKER_USER}/${IMAGE}:latest
+push:
+	docker tag ${IMAGE}:${VERSION} ${IMAGE}:latest
+	docker push ${IMAGE}:${VERSION}
+	docker push ${IMAGE}:latest

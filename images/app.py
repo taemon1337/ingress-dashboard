@@ -8,6 +8,10 @@ app.config["IMAGE_DIR"] = "artwork"
 app.config["LINK_PREFIX"] = "/img"
 app.config["LINK_DEFAULT"] = app.config["IMAGE_DIR"] + "/projects/kubernetes/icon/color/kubernetes-icon-color.svg"
 
+@app.route('/health', methods=['GET'])
+def health():
+  return "OK"
+
 @app.route('/', methods=['GET'])
 def list():
   process = run(['find', app.config["IMAGE_DIR"], "-name", "*.svg"], check=True, stdout=PIPE, universal_newlines=True)
