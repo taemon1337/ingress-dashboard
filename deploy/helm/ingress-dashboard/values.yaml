@@ -4,7 +4,7 @@ image:
   dashboard:
     repository: taemon1337/ingress-dashboard
     pullPolicy: IfNotPresent
-    tag: "0.0.6"
+    tag: "0.0.7"
   images:
     repository: taemon1337/image-api
     pullPolicy: IfNotPresent
@@ -17,6 +17,7 @@ image:
 ingress:
   enabled: true
   host: dashboard
+  imagehost: images
   tls: null
 
 resources:

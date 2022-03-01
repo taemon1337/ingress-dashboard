@@ -9,10 +9,12 @@
   let paths = rules.map(r => r.http.paths.map(p => p.path || '/')).flat(2)
   let labels = Object.keys(ingress.metadata.labels || {})
   let annotes = Object.keys(ingress.metadata.annotations || {})
+  let title = ingress.metadata.annotations["dashboard-title"]
+  let hosttitle = ingress.metadata.annotations["dashboard-host"]
   let host = ingress.spec.rules[0].host
   let proto = ingress.spec.tls ? "https://" : "http://"
-  let href = ingress.metadata.annotations.href || proto + host
-  let img = ingress.metadata.annotations.imagesrc || ImageUrl(name)
+  let href = ingress.metadata.annotations["dashboard-href"] || proto + host
+  let img = ingress.metadata.annotations["dashboard-image"] || ImageUrl(name)
   let showdetails = false;
 
   let showhide = () => {
@@ -24,9 +26,9 @@
     <img src={img} alt={name} class="h-32 rounded-xl">
   </figure>
   <div class="card-body items-center text-center">
-    <h2 class="card-title">{name}</h2>
+    <h2 class="card-title">{title || name}</h2>
     <div class="text-sm">
-      <a target="_blank" href={href}>{host}</a>
+      <a target="_blank" href={href}>{hosttitle || host}</a>
       <div class="stats-vertical bg-primary text-primary-content rounded-xl">
         <div class="stat">
           <div class="stat-title">Paths</div>
