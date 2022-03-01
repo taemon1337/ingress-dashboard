@@ -31,9 +31,9 @@
             {/each}
           </span>
           <div class="stat-actions">
-            <button target="_blank" href={href} class="btn btn-sm btn-success">
+            <a target="_blank" href={href} class="btn btn-sm btn-success">
               Open {name}
-            </button>
+            </a>
           </div>
         </div>
         

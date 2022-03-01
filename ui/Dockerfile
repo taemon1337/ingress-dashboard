@@ -5,7 +5,13 @@ COPY . /app
 
 RUN npm run build
 
-FROM caddy:alpine
+FROM nginx:alpine
 
-WORKDIR /usr/share/caddy
-COPY --from=0 /app/build /usr/share/caddy/
+COPY --from=0 /app/build /usr/share/nginx/html
+
+WORKDIR /usr/share/nginx/html
+
+VOLUME /data
+
+# /data/data.json should be a shared volume where ingresses get downloaded to
+RUN ln -s /data/data.json data.json

@@ -1,3 +1,3 @@
 export const variables = {
-  ImageApi: import.meta.env.VITE_IMAGE_API
+  ImageApi: process.env.IMAGE_API || import.meta.env.VITE_IMAGE_API
 };

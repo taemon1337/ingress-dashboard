@@ -14,7 +14,7 @@ TOKEN=$(cat ${SERVICEACCOUNT}/token)
 CACERT=${SERVICEACCOUNT}/ca.crt
 
 while true; do
-  if curl --fail -o "${JSONFILE}" --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/${ENDPOINT} ; then
+  if curl --fail -v -o "${JSONFILE}" --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/${ENDPOINT} ; then
     echo "[SUCCESS] $(date) Downloaded ${ENDPOINT} to ${JSONFILE}"
   else
     echo "[FAIL] $(date) Error downloading ${ENDPOINT}"
