@@ -3,16 +3,15 @@
   import { Icon, InformationCircle } from "svelte-hero-icons";
   export let ingress;
 
-  let name = ingress.metadata.name.split("-").filter(a => a != "ingress").pop(0)
-  //let name = ingress.metadata.name.replace('ingress', '').replace('--','-').replace(/\-$/, "")
+  let name = ingress.metadata.annotations.title || ingress.metadata.name.split("-").filter(a => a != "ingress").pop(0)
   let rules = ingress.spec.rules
   let hosts = rules.map(r => r.host)
   let paths = rules.map(r => r.http.paths.map(p => p.path || '/')).flat(2)
-  let host = ingress.spec.rules[0].host
-  let proto = ingress.spec.tls ? "https://" : "http://"
   let labels = Object.keys(ingress.metadata.labels || {})
   let annotes = Object.keys(ingress.metadata.annotations || {})
-  let href = proto + host
+  let host = ingress.spec.rules[0].host
+  let proto = ingress.spec.tls ? "https://" : "http://"
+  let href = ingress.metadata.annotations.href || proto + host
   let img = ingress.metadata.annotations.imagesrc || ImageUrl(name)
   let showdetails = false;
 
