@@ -31,10 +31,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress
+  name: images-ingress
   annotations:
     "dashboard-title": "Image Search"
-    "dashboard-href": "/"
 spec:
   rules:
   - host: {{ .Values.ingress.imagehost }}
