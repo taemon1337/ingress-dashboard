@@ -1,5 +1,6 @@
 <script>
   import { ImageUrl } from '../stores/images.js';
+  import { Icon, InformationCircle } from "svelte-hero-icons";
   export let ingress;
 
   let name = ingress.metadata.name.split("-").filter(a => a != "ingress").pop(0)
@@ -13,6 +14,11 @@
   let annotes = Object.keys(ingress.metadata.annotations || {})
   let href = proto + host
   let img = ingress.metadata.annotations.imagesrc || ImageUrl(name)
+  let showdetails = false;
+
+  let showhide = () => {
+    showdetails = !showdetails
+  }
 </script>
 <div class="card shadow-xl">
   <figure>
@@ -31,25 +37,32 @@
             {/each}
           </span>
           <div class="stat-actions">
+            <a href on:click|preventDefault={showhide} title="Show details" class="text-xs float-right text-right">
+              <Icon size="32" src="{InformationCircle}" />
+            </a>
             <a target="_blank" href={href} class="btn btn-sm btn-success">
               Open {name}
             </a>
           </div>
         </div>
         
-        <div class="stat">
-          <div class="stat-title">Labels</div>
-          {#each labels as label}
-            <div class="stat-value text-xs text-left">{label}={ingress.metadata.labels[label]}</div>
-          {/each}
+        {#if showdetails}
+        <div class="container"> 
+          <div class="stat">
+            <div class="stat-title">Labels</div>
+            {#each labels as label}
+              <div class="stat-value text-xs text-left">{label}={ingress.metadata.labels[label]}</div>
+            {/each}
+          </div>
+  
+          <div class="stat">
+            <div class="stat-title">Annotations</div>
+            {#each annotes as annote}
+              <div class="stat-value text-xs text-left">{annote}: {ingress.metadata.annotations[annote]}</div>
+            {/each}
+          </div>
         </div>
-
-        <div class="stat">
-          <div class="stat-title">Annotations</div>
-          {#each annotes as annote}
-            <div class="stat-value text-xs text-left">{annote}: {ingress.metadata.annotations[annote]}</div>
-          {/each}
-        </div>
+        {/if}
       </div>
     </div>
   </div>

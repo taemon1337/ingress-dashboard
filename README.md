@@ -6,3 +6,6 @@ If you have ever tried to visit an Ingress host on a Kubernetes cluster and been
 
 ## How?
 Most ingress controllers allow a default service to be used when no route matches an incoming request, this project will serve a simpe UI listing all the Ingresses so that users can find the correct location.
+
+## Screenshot
+![Screenshot](/docs/screenshot.png?raw=true "Ingress Dashboard Screenshot")
