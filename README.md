@@ -11,7 +11,7 @@ Most ingress controllers allow a default service to be used when no route matche
 ![Screenshot](/docs/screenshot.png?raw=true "Ingress Dashboard Screenshot")
 
 ## Getting Started
-A Helm chart is provided at [deploy/helm][./deploy/helm/ingress-dashboard] and can be installed as follows:
+A Helm chart is provided at [deploy/helm](./deploy/helm/ingress-dashboard) and can be installed as follows:
 
 ```
   git clone git@github.com:taemon1337/ingress-dashboard.git
