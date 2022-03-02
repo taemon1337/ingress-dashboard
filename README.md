@@ -9,3 +9,29 @@ Most ingress controllers allow a default service to be used when no route matche
 
 ## Screenshot
 ![Screenshot](/docs/screenshot.png?raw=true "Ingress Dashboard Screenshot")
+
+## Getting Started
+A Helm chart is provided at [deploy/helm][./deploy/helm/ingress-dashboard] and can be installed as follows:
+
+```
+  git clone git@github.com:taemon1337/ingress-dashboard.git
+  helm install ./ingress-dashboard/deploy/helm/ingress-dashboard
+```
+
+See your Ingress Controller documentation for how to set a default backend; for `nginx-ingress` there is a `--default-backend-service` [cli argument](https://kubernetes.github.io/ingress-nginx/user-guide/cli-arguments/) that can be set to `ingress-dashboard/ingress-dashboard` if you don't modify the release name.
+
+## Ingress Annotations
+The Dashboard will use the `ingress.metadata.name` to attempt to load an accurate project photo for the ingress if the ingress is named after the project, i.e. `longhorn-ingress` will load the "longhorn" icon.  You can use the following `annotations` on the Ingress resource to tell the Dashboard you want to use specific values in the Dashboard.
+
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <project-name>-ingress
+  annotations:
+    "dashboard-title": "My Falco Service"
+    "dashboard-image": "/img/falco"
+    "dashboard-host": "myservice.mycluster.com"
+    "dashboard-href": "myservice.mycluster.com/falco/ui"
+```
+
