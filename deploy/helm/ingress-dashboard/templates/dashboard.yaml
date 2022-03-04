@@ -18,12 +18,9 @@ spec:
       volumes:
       - name: data-volume
         emptyDir: {}
-      - name: dotenv
+      - name: nginx-config
         configMap:
-          name: {{ .Release.Name }}-dotenv
-          items:
-          - key: ".env"
-            path: ".env"
+          name: {{ .Release.Name }}-nginx
       containers:
         - name: dashboard
           image: {{ .Values.image.dashboard.repository }}:{{ .Values.image.dashboard.tag | default .Chart.AppVersion }}
@@ -49,9 +46,8 @@ spec:
             - mountPath: /data
               name: data-volume
               readOnly: true
-            - mountPath: /usr/share/caddy/
-              name: dotenv
-              readOnly: true
+            - mountPath: /etc/nginx/conf.d
+              name: nginx-config
         - name: kubectl
           image: {{ .Values.image.kubectl.repository }}:{{ .Values.image.kubectl.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.image.kubectl.pullPolicy }}
