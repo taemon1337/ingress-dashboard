@@ -3,7 +3,10 @@ FROM node:current-alpine
 WORKDIR /app
 COPY . /app
 
-ENV VITE_IMAGE_API=""
+ENV VITE_IMAGE_API="" \
+    VITE_CARD_CLASSES="grid_md:grid-cols-4_sm:grid-cols-3_xs:grid-cols-1_gap-4" \
+    VITE_IMAGE_HEIGHT=32
+
 RUN npm run build
 
 FROM nginx:alpine

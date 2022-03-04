@@ -1,9 +1,12 @@
 version: "3"
 services:
   dashboard:
-    image: taemon1337/ingress-dashboard:0.0.7
+    image: taemon1337/ingress-dashboard:0.0.8
     ports:
       - 8080:80
+    environment:
+      - VITE_IMAGE_HEIGHT=128
+      - VITE_CARD_CLASSES="grid_md:grid-cols-6_sm:grid-cols-3_xs:grid-cols-1_gap-8"
     depends_on:
       - images.svc.cluster.local
     networks:

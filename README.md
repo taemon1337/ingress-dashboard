@@ -29,9 +29,13 @@ kind: Ingress
 metadata:
   name: <project-name>-ingress
   annotations:
-    "dashboard-title": "My Falco Service"
-    "dashboard-image": "/img/falco"
-    "dashboard-host": "myservice.mycluster.com"
-    "dashboard-href": "myservice.mycluster.com/falco/ui"
+    "dashboard-hide": ""                                  # if present, do not display in dashboard
+    "dashboard-index": 1                                  # sort by index (lower is first)
+    "dashboard-title": "My Falco Service"                 # title to override default which is host
+    "dashboard-text": "Additional text to display"        # only display if present
+    "dashboard-image": "/img/falco"                       # specify either full URL or images service slug /img/<slug>
+    "dashboard-host": "myservice.mycluster.com"           # set or override host
+    "dashboard-href": "myservice.mycluster.com/falco/ui"  # set or override href
+    "dashboard-proto": "https://"                         # if not overriding href, set the proto to http:// or https://
 ```
 
