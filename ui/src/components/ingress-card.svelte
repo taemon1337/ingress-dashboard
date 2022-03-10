@@ -8,7 +8,7 @@
   let name = ingress.metadata.annotations.title || ingress.metadata.name.split("-").filter(a => a != "ingress").pop(0)
   let rules = ingress.spec.rules
   let imageheight = env.IMAGE_HEIGHT || 32;
-  let imageclass = "h-" + imageheight + " rounded-xl";
+  let imageclass = "object-cover h-" + imageheight + " rounded-xl";
   let paths = rules.map(r => r.http.paths.map(p => p.path || '/')).flat(2)
   let labels = Object.keys(ingress.metadata.labels || {})
   let annotes = Object.keys(ingress.metadata.annotations || {})
@@ -26,6 +26,7 @@
   }
 </script>
 <div class="card shadow-xl">
+  <span class="hidden h-16 h-32 h-64"></span>
   <figure>
     <img src={img} alt={name} class={imageclass}>
   </figure>

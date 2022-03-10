@@ -1,7 +1,7 @@
 version: "3"
 services:
   dashboard:
-    image: taemon1337/ingress-dashboard:0.0.8
+    image: taemon1337/ingress-dashboard:0.0.9
     ports:
       - 8080:80
     environment:
@@ -13,6 +13,8 @@ services:
       - dashnet
   images.svc.cluster.local:
     image: taemon1337/image-api:0.0.1
+    ports:
+      - 8000:8080
     networks:
       - dashnet
 networks:

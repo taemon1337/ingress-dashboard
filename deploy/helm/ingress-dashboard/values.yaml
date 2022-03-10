@@ -4,7 +4,7 @@ image:
   dashboard:
     repository: taemon1337/ingress-dashboard
     pullPolicy: IfNotPresent
-    tag: "0.0.9"
+    tag: "0.0.10"
   images:
     repository: taemon1337/image-api
     pullPolicy: IfNotPresent
