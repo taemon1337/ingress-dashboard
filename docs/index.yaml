@@ -3,7 +3,17 @@ entries:
   ingress-dashboard:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-05-17T19:33:13.98588542-04:00"
+    created: "2022-05-18T05:59:29.610207594-04:00"
+    description: A Helm chart for to use as the default Ingress for a Kubernetes cluster
+    digest: c0f8ef9a75ff87892ee236b56dc7e2d655938c99027fbc22d74ba9c293295fee
+    name: ingress-dashboard
+    type: application
+    urls:
+    - ingress-dashboard-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-05-18T05:59:29.609723797-04:00"
     description: A Helm chart for to use as the default Ingress for a Kubernetes cluster
     digest: 4f74d860723e00238db6fc00f962db9f2ee9bfb8357f8988e5e5d74e314bc669
     name: ingress-dashboard
@@ -11,4 +21,4 @@ entries:
     urls:
     - ingress-dashboard-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-17T19:33:13.98521465-04:00"
+generated: "2022-05-18T05:59:29.608958229-04:00"

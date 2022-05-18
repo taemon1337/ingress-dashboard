@@ -15,6 +15,10 @@ spec:
         app: {{ .Release.Name }}-images
     spec:
       serviceAccountName: {{ .Release.Name }}
+      {{- with .Values.imageapi.nodeSelector }}
+      nodeSelector: 
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
         - name: images
           image: {{ .Values.image.images.repository }}:{{ .Values.image.images.tag | default .Chart.AppVersion }}

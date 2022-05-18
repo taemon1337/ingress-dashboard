@@ -14,6 +14,12 @@ image:
     pullPolicy: IfNotPresent
     tag: latest
 
+dashboard:
+  nodeSelector: {}
+
+imageapi:
+  nodeSelector: {}
+
 ingress:
   enabled: true
   host: dashboard
